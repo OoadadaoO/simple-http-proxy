@@ -16,6 +16,12 @@ To configure the HTTP Proxy, follow these steps:
 
 ## Run the Application
 
+First install the dependencies by the following command:
+
+```bash
+$ yarn
+```
+
 To run the HTTP Proxy, use the following commands:
 
 - **Development Mode**:
