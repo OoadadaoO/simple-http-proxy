@@ -24,10 +24,15 @@ morgan.token("colorMethod", (req) => {
 morgan.token("colorUrl", (req) => {
   return `\x1b[36m${req.url}\x1b[0m`;
 });
+morgan.token("ip", (req) => {
+  const forwardIp = (req.headers["x-forwarded-for"] as string) || "";
+  const realIp = (req.headers["x-real-ip"] as string) || "";
+  return forwardIp || realIp || "NoIP";
+});
 
 morgan.format(
   "custom",
-  ':remote-addr - :remote-user [:date[clf]] :colorMethod :colorUrl HTTP/:http-version :colorStatus ":response-time ms" ":user-agent"'
+  ':ip - [:date[clf]] :colorMethod :colorUrl HTTP/:http-version :colorStatus ":response-time ms" ":user-agent"'
   // ':remote-addr - :remote-user [:date[clf]] :colorMethod :colorUrl HTTP/:http-version :colorStatus ":response-time ms" ":res[content-length]" ":referrer" ":user-agent"'
 );
 
